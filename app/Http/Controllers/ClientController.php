@@ -27,15 +27,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'cpf' => 'required',
-            'cep' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-         ]);
-
+        
         if(Client::create($request->all())){
             return response()->json(['status' => 'success']);
         }else{
