@@ -27,11 +27,25 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
         
-        if(Client::create($request->all())){
-            return response()->json(['status' => 'success']);
-        }else{
-            return response()->json(['status' => 'fail']);
+        $validator = \Validator::make($data, [
+            'name' => 'required',
+            'cpf' => 'required',
+            'cep' => 'required',
+            // 'address' => 'required',
+            // 'city' => 'required',
+            // 'state' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'fail', 'error' => $validator->errors()->messages()]);
+        }
+
+        if (Client::create($request->all())) {
+            return response()->json(['status' => 'success', 'msg' => 'Salvo com sucesso!']);
+        } else {
+            return response()->json(['status' => 'fail', 'error' => [0 => 'Erro ao salvar']]);
         }
     }
 }

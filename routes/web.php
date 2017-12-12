@@ -19,5 +19,5 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'clients'], function () use ($router) {
     $router->get('/', ['as' => 'profile', 'uses' => 'ClientController@index']);
-    $router->post('/', ['as' => 'profile', 'uses' => 'ClientController@create']);
+    $router->post('/', ['as' => 'profile', 'uses' => 'ClientController@store']);
 });
