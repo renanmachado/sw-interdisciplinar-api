@@ -28,16 +28,16 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
+
         $validator = \Validator::make($data, [
             'name' => 'required',
-            'cpf' => 'required',
-            'cep' => 'required',
-            // 'address' => 'required',
-            // 'city' => 'required',
-            // 'state' => 'required',
+            'cpf' => 'required|unique:clients',
+            'cep' => 'required|unique:clients',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
         ]);
-
+        
         if ($validator->fails()) {
             return response()->json(['status' => 'fail', 'error' => $validator->errors()->messages()]);
         }

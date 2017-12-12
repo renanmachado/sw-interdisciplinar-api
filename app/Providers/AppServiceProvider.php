@@ -14,5 +14,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        config(['app.locale' => 'pt-BR']);
     }
 }
